@@ -47,6 +47,24 @@ def img3dImage(image):
                                smoothing=30, lambda1=1, lambda2=2,
                                iter_callback=plot_3d(plot_each=20))
 
+
+def oneImg(image):
+    inverseGaussianGradient = morphsnakes.inverse_gaussian_gradient(image, alpha=1000, sigma=5.48)
+    initLevelSet = morphsnakes.circle_level_set(image.shape, center=(150, 606), radius=20)
+    morphsnakes.morphological_geodesic_active_contour(inverseGaussianGradient, iterations=545,
+                                                      init_level_set=initLevelSet,
+                                                      smoothing=20, threshold=0.31,
+                                                      balloon=1, iter_callback=plot_2d(image))
+
+
+def twoImg(image):
+    inverseGaussianGradient = morphsnakes.inverse_gaussian_gradient(image, alpha=1000, sigma=5.48)
+    initLevelSet = morphsnakes.circle_level_set(image.shape, center=(90, 806), radius=20)
+    morphsnakes.morphological_geodesic_active_contour(inverseGaussianGradient, iterations=545,
+                                                      init_level_set=initLevelSet,
+                                                      smoothing=20, threshold=0.31,
+                                                      balloon=1, iter_callback=plot_2d(image))
+
 def plot_2d(image):
         figer = plt.figure()
         plotA = figer.add_subplot(1, 2, 1)

@@ -1,7 +1,7 @@
 import numpy as np
 from imageio import imread
 
-from model.methods import seaImg, moneyImage, manImage, seastarImage, mapImage, img3dImage
+from model.methods import seaImg, moneyImage, manImage, seastarImage, mapImage, img3dImage, oneImg, twoImg
 from view.pathes import *
 
 def rgb2gray(rgb):
@@ -15,6 +15,14 @@ def money():
 
 def man():
     manImage(imread(IMG_MAN) / 255.0)
+
+
+def one():
+    oneImg(imread(IMG_ONE)[..., 0] / 255.0)
+
+def two():
+    twoImg(imread(IMG_TWO)[..., 0] / 255.0)
+
 
 def seastar():
     seastarImage( rgb2gray(imread(IMG_SEASTAR) / 255.0),imread(IMG_SEASTAR))
