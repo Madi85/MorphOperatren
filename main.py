@@ -8,10 +8,11 @@ if os.environ.get('DISPLAY', '') == '':
     matplotlib.use('TkAgg')
 
 if __name__ == '__main__':
-    one()
-    two()
+
    # money()
    # map()
     sea()
+    one()
+    two()
     #seastar()
     man()

@@ -56,7 +56,6 @@ def oneImg(image):
                                                       smoothing=20, threshold=0.31,
                                                       balloon=1, iter_callback=plot_2d(image))
 
-
 def twoImg(image):
     inverseGaussianGradient = morphsnakes.inverse_gaussian_gradient(image, alpha=1000, sigma=5.48)
     initLevelSet = morphsnakes.circle_level_set(image.shape, center=(90, 806), radius=20)
@@ -65,22 +64,23 @@ def twoImg(image):
                                                       smoothing=20, threshold=0.31,
                                                       balloon=1, iter_callback=plot_2d(image))
 
-def plot_2d(image):
-        figer = plt.figure()
-        plotA = figer.add_subplot(1, 2, 1)
-        plotA.imshow(image, cmap=plt.cm.gray)
-        plotB = figer.add_subplot(1, 2, 2)
-        axisY = plotB.imshow(np.zeros_like(image), vmin=0, vmax=1)
 
-        def iterCallback(levelset):
-            if plotA.collections:
-                del plotA.collections[0]
-            plotA.contour(levelset, [0.8], colors='b')
-            axisY.set_data(levelset)
-            figer.canvas.draw()
-            plt.pause(0.1)
+def plot_2d(image, figer=None):
+    figer = plt.figure()
+    plotA = figer.add_subplot(1, 2, 1)
+    plotA.imshow(image, cmap=plt.cm.gray)
+    plotB = figer.add_subplot(1, 2, 2)
+    axisY = plotB.imshow(np.zeros_like(image), vmin=0, vmax=1)
 
-        return iterCallback
+    def iterCallback(levelset):
+        if plotA.collections:
+            del plotA.collections[0]
+        plotA.contour(levelset, [0.8], colors='r')
+        axisY.set_data(levelset)
+        figer.canvas.draw()
+        plt.pause(0.1)
+
+    return iterCallback
 
 def plot_3d(plot_each):
         figer = plt.figure()
